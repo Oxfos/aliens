@@ -1,3 +1,5 @@
+1/2/2020:
+
 Dealing with line endings (CRLF vs LF):
 
 Since I expect this project to work with a Python GUI installed on the Windows system - That is why I'm coding through the Command Prompt - I prefer all files end-of-line (eol) to be formatted with CRLF.
@@ -22,3 +24,6 @@ I only care that the local files have CRLF.
 I modified files and did a git reset --hard to the first commit but files (Pipfile.lock) are still marked as LF. So I don't know for the moment what core.autocrfl = true does...
 Since git setting file.eol is set to auto possibly VS Code decides self how to format eol in files...
 Anyhow, we will see when it's time to use the Python GUI...
+
+I modified Pipfile.lock (added an empty line at the end), committed, did again the hard reset to a previous commit and now VS Code does show it as being CRLF formatted.
+So possibly files have first to be modified... to check.
