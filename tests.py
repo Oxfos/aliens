@@ -1,6 +1,5 @@
 import unittest
 from settings import Settings
-from alien_invasion import AlienInvasion
 
 
 class TestSettings(unittest.TestCase):
@@ -30,6 +29,7 @@ class TestAlienInvasion(unittest.TestCase):
     def test_run_game(self):
         
         self.assertEqual(self.screen.fill(self.settings.bg_color),self.screen.fill((230,230,230)))
+"""
 
 if __name__ == "__main__":
     unittest.main()
