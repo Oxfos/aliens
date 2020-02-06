@@ -1,3 +1,6 @@
+Pygame exercise.
+From 'Python Crash Course' by Eric Matthes.
+
 1/2/2020:
 
 Dealing with line endings (CRLF vs LF):
