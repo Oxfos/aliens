@@ -30,7 +30,6 @@ class AlienInvasion:
             self._update_aliens()
             self._update_screen()
 
-
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
@@ -74,8 +73,20 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
     
+    def aliens_check_edges(self):
+        """Checkes whether the group touches edges"""
+        screen_r = self.settings.screen_width
+        alien = Alien(self)
+        width = alien.rect.width
+        if any(alien.rect.x+width >= screen_r for alien in self.aliens)\
+             or any(alien.rect.x <= 0 for alien in self.aliens):
+            return True
+
     def _update_aliens(self):
         """Update the positions of all aliens in the fleet."""
+        if self.aliens_check_edges():
+            self.settings.fleet_direction = self.settings.fleet_direction * -1
+            print(self.settings.fleet_direction)
         self.aliens.update()
 
     def _create_fleet(self):
