@@ -74,7 +74,7 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
     
     def aliens_check_edges(self):
-        """Checkes whether the group touches edges"""
+        """Returns True if the group touches screen l, r edges"""
         screen_r = self.settings.screen_width
         alien = Alien(self)
         width = alien.rect.width
@@ -82,11 +82,14 @@ class AlienInvasion:
              or any(alien.rect.x <= 0 for alien in self.aliens):
             return True
 
-    def _update_aliens(self):
-        """Update the positions of all aliens in the fleet."""
+    def _change_fleet_direction(self):
+        """Changes fleet direction if any of Alien touches screen edges"""
         if self.aliens_check_edges():
             self.settings.fleet_direction = self.settings.fleet_direction * -1
-            print(self.settings.fleet_direction)
+    
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet."""
+        self._change_fleet_direction()
         self.aliens.update()
 
     def _create_fleet(self):
