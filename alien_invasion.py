@@ -86,6 +86,10 @@ class AlienInvasion:
         """Changes fleet direction if any of Alien touches screen edges"""
         if self.aliens_check_edges():
             self.settings.fleet_direction = self.settings.fleet_direction * -1
+        # Fleet drop
+            self.settings.drop_switch = 1
+        else:
+            self.settings.drop_switch = 0
     
     def _update_aliens(self):
         """Update the positions of all aliens in the fleet."""
