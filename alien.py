@@ -30,4 +30,8 @@ class Alien(Sprite):
     def update(self):
         """Move the alien right or left."""
         self.rect.x += self.settings.alien_speed * self.settings.fleet_direction
+        """
+        My solution: I add a moving operation in y direction similar to 
+        moving in x direction with a switch operator:
+        """
         self.rect.y += self.settings.fleet_drop * self.settings.drop_switch

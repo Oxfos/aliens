@@ -73,28 +73,41 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
     
-    def aliens_check_edges(self):
+    def _check_fleet_edges(self):
         """Returns True if the group touches screen l, r edges"""
+        """
+        My solution (I did not know you can use break in a for cycle!!):
         screen_r = self.settings.screen_width
         alien = Alien(self)
         width = alien.rect.width
         if any(alien.rect.x+width >= screen_r for alien in self.aliens)\
              or any(alien.rect.x <= 0 for alien in self.aliens):
             return True
+        """
+        # Book solution: it checks AND also calls _change_fleet_direction()
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
 
     def _change_fleet_direction(self):
         """Changes fleet direction if any of Alien touches screen edges"""
-        if self.aliens_check_edges():
-            self.settings.fleet_direction = self.settings.fleet_direction * -1
-        # Fleet drop
-            self.settings.drop_switch = 1
-        else:
-            self.settings.drop_switch = 0
-    
+        self.settings.fleet_direction *= -1
+        # Fleet drop, my solution: using an intermediary switch
+        self.settings.drop_switch = 1
+        """ Book solution:
+        I disagree with this solution because it moves the moving operation
+        in y direction from the Alien class to the Game class, whereas the moving 
+        operation in x direction remains in the Alien class
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        """
+
     def _update_aliens(self):
         """Update the positions of all aliens in the fleet."""
-        self._change_fleet_direction()
+        self._check_fleet_edges()
         self.aliens.update()
+        self.settings.drop_switch = 0 # My solution: switch off
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
