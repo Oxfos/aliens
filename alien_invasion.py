@@ -132,7 +132,6 @@ class AlienInvasion:
         # Pause.
         sleep(0.5)
 
-
     def _update_aliens(self):
         """Update the positions of all aliens in the fleet."""
         self._check_fleet_edges()
@@ -141,6 +140,8 @@ class AlienInvasion:
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
+        # Look for aliens hitting the bottom of the screen.
+        self._check_aliens_bottom()
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
@@ -166,6 +167,13 @@ class AlienInvasion:
         alien.rect.x = alien_width + 2 * alien_width * alien_number
         alien.rect.y = alien_height + 2 * alien_height * row_number
         self.aliens.add(alien)
+
+    def _check_aliens_bottom(self):
+        """Check if any aliens have reached the bottom of the screen."""
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= self.settings.screen_height:
+                self._ship_hit()
+                break
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
