@@ -106,6 +106,7 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
     
     def _check_fleet_edges(self):
         """Returns True if the group touches screen l, r edges"""
