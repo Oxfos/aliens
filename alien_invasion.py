@@ -7,6 +7,7 @@ from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from scoreboard import Scoreboard
 
 
 class AlienInvasion:
@@ -21,6 +22,7 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -104,6 +106,10 @@ class AlienInvasion:
         # Remove bullets and aliens that have collided.
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, 
             True, True)
+        if collisions:            
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
+        
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
@@ -208,6 +214,7 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+        self.sb.show_score()
         # Draw the play button if the game is inactive.
         if not self.stats.game_active:
             self.play_button.draw_button()
