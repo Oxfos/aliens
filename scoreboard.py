@@ -57,8 +57,8 @@ class Scoreboard:
         
         # Display the level at the top left of the screen.
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.left = self.screen_rect.left + 20
-        self.level_rect.top = self.score_rect.top
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10
 
     def show_score(self):
         """Displays the score to the screen."""
