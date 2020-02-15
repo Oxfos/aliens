@@ -60,6 +60,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_level()
             self.bullets.empty()
             self.aliens.empty()
             self._create_fleet()
