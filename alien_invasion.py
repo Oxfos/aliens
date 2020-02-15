@@ -198,8 +198,11 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
         alien.rect.x = alien_width + 2 * alien_width * alien_number
+        # Store the alien's exact horizontal position.
+        alien.x = float(alien.rect.x)
         alien.rect.y = alien_height + 2 * alien_height * row_number
         self.aliens.add(alien)
+        print(f"{alien.rect.x} - {alien.rect.y}")
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""

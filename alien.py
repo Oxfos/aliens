@@ -18,9 +18,6 @@ class Alien(Sprite):
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 
-        # Store the alien's exact horizontal position.
-        self.x = float(self.rect.x)
-
     def check_edges(self):
         """Return True if alien is at edge of screen."""
         screen_rect = self.screen.get_rect()
@@ -29,7 +26,11 @@ class Alien(Sprite):
     
     def update(self):
         """Move the alien right or left."""
-        self.rect.x += self.settings.alien_speed * self.settings.fleet_direction
+        # Use update()-internal float x to assign alien.rect.x
+        # and do not take alien.rect.x otherwise you cannot accept alien
+        # speeds lower than 1 because they will always be int()-ed >> 0
+        self.x += self.settings.alien_speed * self.settings.fleet_direction
+        self.rect.x = self.x
         """
         My solution: I add a moving operation in y direction similar to 
         moving in x direction with a switch operator:
